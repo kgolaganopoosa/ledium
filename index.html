@@ -9,7 +9,7 @@
         :root {
             --primary: #000000;
             --secondary: #ffffff;
-            --accent: #333333;
+            --gray: #f4f4f4;
         }
 
         * {
@@ -18,7 +18,7 @@
             box-sizing: border-box;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         body {
@@ -40,179 +40,181 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 900;
+            text-decoration: none;
+            color: var(--primary);
         }
 
-        /* Hero Section */
+        /* Hero */
         header {
-            height: 40vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 60px 5%;
             background: var(--primary);
             color: var(--secondary);
             text-align: center;
         }
 
-        /* Categories Section */
-        .container {
-            padding: 50px 5%;
-        }
+        header h1 { font-size: 3rem; margin-bottom: 10px; }
+        header p { font-size: 0.9rem; opacity: 0.8; }
 
-        .category-title {
-            margin: 40px 0 20px;
-            border-left: 5px solid var(--primary);
-            padding-left: 15px;
-            font-size: 1.2rem;
+        /* Product Grid */
+        .container { padding: 40px 5%; }
+        
+        .category-header {
+            margin: 60px 0 30px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+            padding-bottom: 5px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
         }
 
-        /* Product Card */
         .product-card {
-            border: 1px solid #eee;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
+            transition: transform 0.3s ease;
         }
 
         .product-card:hover {
-            border-color: var(--primary);
+            transform: translateY(-5px);
         }
 
-        .product-image {
+        /* Essential: Square Image Formatting */
+        .image-container {
             width: 100%;
-            height: 300px;
-            background: #f4f4f4;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #ccc;
+            aspect-ratio: 1 / 1; /* Forces Square */
+            overflow: hidden;
+            background: var(--gray);
+            margin-bottom: 15px;
+            border: 1px solid #eee;
         }
 
-        .product-info {
-            padding: 15px;
-            text-align: center;
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image fills square without stretching */
+            filter: grayscale(100%); /* Keeps the B&W theme consistent */
+            transition: 0.5s;
         }
 
-        .price {
-            margin: 10px 0;
-            font-weight: bold;
+        .product-card:hover img {
+            filter: grayscale(0%); /* Subtle color pop on hover */
+            transform: scale(1.05);
         }
 
-        /* WhatsApp Button */
+        .product-info h3 { font-size: 1rem; margin-bottom: 8px; }
+        .price { font-weight: bold; margin-bottom: 15px; display: block; }
+
+        /* Order Button */
         .order-btn {
-            display: block;
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
             background: var(--primary);
             color: var(--secondary);
-            padding: 12px;
             text-decoration: none;
+            text-align: center;
+            font-weight: bold;
             font-size: 0.8rem;
             transition: 0.3s;
-            border: 1px solid var(--primary);
         }
 
         .order-btn:hover {
-            background: var(--secondary);
-            color: var(--primary);
+            background: #333;
         }
 
         /* Footer */
         footer {
             background: var(--primary);
             color: var(--secondary);
-            padding: 50px 5% 20px;
-            margin-top: 50px;
+            padding: 80px 5% 30px;
+            margin-top: 100px;
         }
 
-        .footer-content {
+        .footer-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
-            margin-bottom: 30px;
+            margin-bottom: 50px;
         }
 
+        .footer-logo { font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; }
+        .footer-links p { font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7; }
+        
         .footer-bottom {
             text-align: center;
             font-size: 0.7rem;
-            border-top: 1px solid #333;
-            padding-top: 20px;
-        }
-
-        @media (max-width: 600px) {
-            .grid { grid-template-columns: 1fr; }
+            opacity: 0.5;
+            padding-top: 30px;
+            border-top: 1px solid #222;
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">LEDIUM</div>
-        <div class="cart-icon"><i class="fas fa-shopping-bag"></i></div>
+        <a href="#" class="logo">LEDIUM</a>
+        <div><i class="fas fa-search" style="margin-right: 20px;"></i><i class="fas fa-shopping-cart"></i></div>
     </nav>
 
     <header>
-        <h1>LEDIUM CLOTHING</h1>
-        <p>Premium Essentials. Minimalist Style.</p>
+        <h1>LEDIUM</h1>
+        <p>STREETWEAR & MODERN MINIMALISM</p>
     </header>
 
-    <div class="container">
+    <div class="container" id="shop">
         
-        <h2 class="category-title">T-Shirts</h2>
+        <h2 class="category-header">T-Shirts</h2>
         <div class="grid">
             <div class="product-card">
-                <div class="product-image">
-                  <img src="t1.png">
+                <div class="image-container">
+                    <img src="t1.png" alt="Ledium Tee">
                 </div>
                 <div class="product-info">
-                    <h3>Essential Black Tee</h3>
-                    <p class="price">R 349.00</p>
-                    <a href="https://wa.me/27824598656?text=Hi%20Ledium%21%20I%20would%20like%20to%20order%20the%20Essential%20Black%20Tee." class="order-btn">PLACE ORDER</a>
+                    <h3>Classic Heavyweight Tee</h3>
+                    <span class="price">R 450.00</span>
+                    <a href="https://wa.me/27824598656?text=Hi%20Ledium!%20I%20want%20to%20order%20the%20Classic%20Heavyweight%20Tee." class="order-btn">PLACE ORDER</a>
                 </div>
             </div>
             <div class="product-card">
-                <div class="product-image">
-                  <img src="t2.png">
+                <div class="image-container">
+                    <img src="t2.png" alt="Ledium Tee">
                 </div>
                 <div class="product-info">
-                    <h3>White Oversized Tee</h3>
-                    <p class="price">R 399.00</p>
-                    <a href="https://wa.me/27824598656?text=Hi%20Ledium%21%20I%20would%20like%20to%20order%20the%20White%20Oversized%20Tee." class="order-btn">PLACE ORDER</a>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="category-title">Caps</h2>
-        <div class="grid">
-            <div class="product-card">
-                <div class="product-image">
-                  <img src="t3.png">
-                </div>
-                <div class="product-info">
-                    <h3>Signature Trucker Cap</h3>
-                    <p class="price">R 249.00</p>
-                    <a href="https://wa.me/27824598656?text=Hi%20Ledium%21%20I%20would%20like%20to%20order%20the%20Signature%20Trucker%20Cap." class="order-btn">PLACE ORDER</a>
+                    <h3>Boxy Signature Tee</h3>
+                    <span class="price">R 499.00</span>
+                    <a href="https://wa.me/27824598656?text=Hi%20Ledium!%20I%20want%20to%20order%20the%20Boxy%20Signature%20Tee." class="order-btn">PLACE ORDER</a>
                 </div>
             </div>
         </div>
 
-        <h2 class="category-title">Jeans</h2>
+        <h2 class="category-header">Caps</h2>
         <div class="grid">
             <div class="product-card">
-                <div class="product-image">
-                  <img src="t4.png">
+                <div class="image-container">
+                    <img src="t3.png" alt="Ledium Cap">
                 </div>
                 <div class="product-info">
-                    <h3>Slim Fit Raw Denim</h3>
-                    <p class="price">R 899.00</p>
-                    <a href="https://wa.me/27824598656?text=Hi%20Ledium%21%20I%20would%20like%20to%20order%20the%20Slim%20Fit%20Raw%20Denim." class="order-btn">PLACE ORDER</a>
+                    <h3>LEDIUM Dad Hat</h3>
+                    <span class="price">R 299.00</span>
+                    <a href="https://wa.me/27824598656?text=Hi%20Ledium!%20I%20want%20to%20order%20the%20LEDIUM%20Dad%20Hat." class="order-btn">PLACE ORDER</a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-header">Jeans</h2>
+        <div class="grid">
+            <div class="product-card">
+                <div class="image-container">
+                    <img src="t4.png" alt="Ledium Jeans">
+                </div>
+                <div class="product-info">
+                    <h3>Straight Leg Denim</h3>
+                    <span class="price">R 950.00</span>
+                    <a href="https://wa.me/27824598656?text=Hi%20Ledium!%20I%20want%20to%20order%20the%20Straight%20Leg%20Denim." class="order-btn">PLACE ORDER</a>
                 </div>
             </div>
         </div>
@@ -220,27 +222,26 @@
     </div>
 
     <footer>
-        <div class="footer-content">
+        <div class="footer-grid">
             <div>
-                <h4>LEDIUM</h4>
-                <p style="font-size: 0.8rem; margin-top: 10px;">The intersection of street style and modern luxury.</p>
+                <div class="footer-logo">LEDIUM</div>
+                <p style="font-size: 0.8rem; opacity: 0.7;">High-quality garments designed for the modern individual.</p>
             </div>
-            <div>
-                <h4>Support</h4>
-                <ul style="list-style: none; font-size: 0.8rem; line-height: 2;">
-                    <li>Shipping Info</li>
-                    <li>Returns & Exchanges</li>
-                    <li>Contact Us</li>
-                </ul>
+            <div class="footer-links">
+                <h4>QUICK LINKS</h4><br>
+                <p>Track Order</p>
+                <p>Size Guide</p>
+                <p>Privacy Policy</p>
             </div>
-            <div>
-                <h4>Contact</h4>
-                <p style="font-size: 0.8rem;">WhatsApp: 082 459 8656</p>
-                <p style="font-size: 0.8rem;">Email: info@ledium.com</p>
+            <div class="footer-links">
+                <h4>CONTACT</h4><br>
+                <p>WhatsApp: 082 459 8656</p>
+                <p>Email: orders@ledium.co.za</p>
+                <p>Johannesburg, ZA</p>
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; 2026 LEDIUM CLOTHING. ALL RIGHTS RESERVED.
+            &copy; 2026 LEDIUM CLOTHING BRAND. DESIGNED FOR EXCELLENCE.
         </div>
     </footer>
 
