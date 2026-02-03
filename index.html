@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEDIUM CLOTHING | Official Store</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #ffffff;
+            --accent: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        body {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        /* Navigation */
+        nav {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--primary);
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+
+        /* Hero Section */
+        header {
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--primary);
+            color: var(--secondary);
+            text-align: center;
+        }
+
+        /* Categories Section */
+        .container {
+            padding: 50px 5%;
+        }
+
+        .category-title {
+            margin: 40px 0 20px;
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
+            font-size: 1.2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        /* Product Card */
+        .product-card {
+            border: 1px solid #eee;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            border-color: var(--primary);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #ccc;
+        }
+
+        .product-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .price {
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        /* WhatsApp Button */
+        .order-btn {
+            display: block;
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 12px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            border: 1px solid var(--primary);
+        }
+
+        .order-btn:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 50px 5% 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 0.7rem;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">LEDIUM</div>
+        <div class="cart-icon"><i class="fas fa-shopping-bag"></i></div>
+    </nav>
+
+    <header>
+        <h1>LEDIUM CLOTHING</h1>
+        <p>Premium Essentials. Minimalist Style.</p>
+    </header>
+
+    <div class="container">
+        
+        <h2 class="category-title">T-Shirts</h2>
+        <div class="grid">
+            <div class="product-card">
+                <div class="product-image">
+                  <img src="t1.png">
+                </div>
+                <div class="product-info">
+                    <h3>Essential Black Tee</h3>
+                    <p class="price">R 349.00</p>
+                    <a href="https://wa.me/27824598656?text=Hi%20Ledium%21%20I%20would%20like%20to%20order%20the%20Essential%20Black%20Tee." class="order-btn">PLACE ORDER</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                  <img src="t2.png">
+                </div>
+                <div class="product-info">
+                    <h3>White Oversized Tee</h3>
+                    <p class="price">R 399.00</p>
+                    <a href="https://wa.me/27824598656?text=Hi%20Ledium%21%20I%20would%20like%20to%20order%20the%20White%20Oversized%20Tee." class="order-btn">PLACE ORDER</a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Caps</h2>
+        <div class="grid">
+            <div class="product-card">
+                <div class="product-image">
+                  <img src="t3.png">
+                </div>
+                <div class="product-info">
+                    <h3>Signature Trucker Cap</h3>
+                    <p class="price">R 249.00</p>
+                    <a href="https://wa.me/27824598656?text=Hi%20Ledium%21%20I%20would%20like%20to%20order%20the%20Signature%20Trucker%20Cap." class="order-btn">PLACE ORDER</a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Jeans</h2>
+        <div class="grid">
+            <div class="product-card">
+                <div class="product-image">
+                  <img src="t4.png">
+                </div>
+                <div class="product-info">
+                    <h3>Slim Fit Raw Denim</h3>
+                    <p class="price">R 899.00</p>
+                    <a href="https://wa.me/27824598656?text=Hi%20Ledium%21%20I%20would%20like%20to%20order%20the%20Slim%20Fit%20Raw%20Denim." class="order-btn">PLACE ORDER</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4>LEDIUM</h4>
+                <p style="font-size: 0.8rem; margin-top: 10px;">The intersection of street style and modern luxury.</p>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <ul style="list-style: none; font-size: 0.8rem; line-height: 2;">
+                    <li>Shipping Info</li>
+                    <li>Returns & Exchanges</li>
+                    <li>Contact Us</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p style="font-size: 0.8rem;">WhatsApp: 082 459 8656</p>
+                <p style="font-size: 0.8rem;">Email: info@ledium.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 LEDIUM CLOTHING. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+</body>
+</html>
