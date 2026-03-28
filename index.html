@@ -10,6 +10,7 @@
             --primary: #000000;
             --secondary: #ffffff;
             --gray: #f4f4f4;
+            --whatsapp: #25D366;
         }
 
         * {
@@ -18,13 +19,10 @@
             box-sizing: border-box;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
         }
 
-        body {
-            background-color: var(--secondary);
-            color: var(--primary);
-        }
+        body { background-color: var(--secondary); color: var(--primary); overflow-x: hidden; }
 
         /* Navigation */
         nav {
@@ -39,125 +37,148 @@
             z-index: 1000;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            text-decoration: none;
-            color: var(--primary);
+        .logo { font-size: 1.8rem; font-weight: 900; text-decoration: none; color: var(--primary); }
+        
+        .cart-icon-container { position: relative; cursor: pointer; font-size: 1.2rem; }
+        #cart-count {
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            background: var(--whatsapp);
+            color: white;
+            font-size: 0.65rem;
+            padding: 3px 7px;
+            border-radius: 50%;
+            font-weight: bold;
         }
 
-        /* Hero */
         header {
-            padding: 60px 5%;
+            padding: 80px 5%;
             background: var(--primary);
             color: var(--secondary);
             text-align: center;
         }
 
-        header h1 { font-size: 3rem; margin-bottom: 10px; }
-        header p { font-size: 0.9rem; opacity: 0.8; }
+        header h1 { font-size: 3.5rem; margin-bottom: 10px; font-weight: 900; }
+        header p { font-size: 0.9rem; letter-spacing: 4px; opacity: 0.8; }
 
-        /* Product Grid */
-        .container { padding: 40px 5%; }
-        
-        .category-header {
-            margin: 60px 0 30px;
-            font-size: 1.5rem;
-            border-bottom: 2px solid var(--primary);
-            display: inline-block;
-            padding-bottom: 5px;
-        }
+        /* Shop Grid */
+        .container { padding: 60px 5%; }
+        .category-header { margin-bottom: 40px; font-size: 1.8rem; border-bottom: 3px solid var(--primary); display: inline-block; }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
+            gap: 50px;
         }
 
-        .product-card {
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Essential: Square Image Formatting */
-        .image-container {
+        /* Image Slider Styles */
+        .product-slider {
+            position: relative;
             width: 100%;
-            aspect-ratio: 1 / 1; /* Forces Square */
+            aspect-ratio: 1 / 1;
             overflow: hidden;
             background: var(--gray);
-            margin-bottom: 15px;
-            border: 1px solid #eee;
+            margin-bottom: 20px;
         }
 
-        .image-container img {
-            width: 100%;
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
             height: 100%;
-            object-fit: cover; /* Ensures image fills square without stretching */
-            filter: grayscale(100%); /* Keeps the B&W theme consistent */
-            transition: 0.5s;
         }
 
-        .product-card:hover img {
-            filter: grayscale(0%); /* Subtle color pop on hover */
-            transform: scale(1.05);
+        .slider-wrapper img {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .product-info h3 { font-size: 1rem; margin-bottom: 8px; }
-        .price { font-weight: bold; margin-bottom: 15px; display: block; }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.7);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 0.8rem;
+        }
 
-        /* Order Button */
-        .order-btn {
-            display: inline-block;
+        .prev { left: 0; }
+        .next { right: 0; }
+
+        .product-info h3 { font-size: 0.95rem; margin-bottom: 5px; min-height: 40px; }
+        .price { font-weight: 900; margin-bottom: 5px; display: block; font-size: 1.1rem; }
+        .delivery-tag { font-size: 0.65rem; color: #666; margin-bottom: 15px; display: block; font-weight: bold; }
+
+        .size-select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .add-btn {
+            display: block;
             width: 100%;
             padding: 15px;
             background: var(--primary);
             color: var(--secondary);
-            text-decoration: none;
-            text-align: center;
+            border: none;
+            cursor: pointer;
             font-weight: bold;
             font-size: 0.8rem;
-            transition: 0.3s;
         }
 
-        .order-btn:hover {
-            background: #333;
+        /* Cart Sidebar */
+        #cart-sidebar {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background: white;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            transition: 0.5s;
+            z-index: 2000;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Footer */
-        footer {
-            background: var(--primary);
-            color: var(--secondary);
-            padding: 80px 5% 30px;
-            margin-top: 100px;
-        }
+        #cart-sidebar.active { right: 0; }
+        .cart-item { padding: 15px 0; border-bottom: 1px solid #f9f9f9; display: flex; justify-content: space-between; align-items: center; }
+        .remove-link { color: #ff4444; font-size: 0.65rem; cursor: pointer; }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 50px;
-        }
-
-        .footer-logo { font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; }
-        .footer-links p { font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7; }
-        
-        .footer-bottom {
+        .whatsapp-checkout {
+            background: var(--whatsapp);
+            color: white;
             text-align: center;
-            font-size: 0.7rem;
-            opacity: 0.5;
-            padding-top: 30px;
-            border-top: 1px solid #222;
+            padding: 20px;
+            text-decoration: none;
+            display: block;
+            font-weight: 900;
+            margin-top: 20px;
         }
+
+        footer { background: var(--primary); color: var(--secondary); padding: 60px 5%; margin-top: 80px; }
+        .policy-box { font-size: 0.7rem; opacity: 0.6; height: 100px; overflow-y: auto; border: 1px solid #333; padding: 10px; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="logo">LEDIUM</a>
-        <div><i class="fas fa-search" style="margin-right: 20px;"></i><i class="fas fa-shopping-cart"></i></div>
+        <!--a href="#" class="logo">LEDIUM</a>-->
+      <img src="logoledium.png" width="65%" height="65%">
+        <div class="cart-icon-container" onclick="toggleCart()">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count">0</span>
+        </div>
     </nav>
 
     <header>
@@ -165,85 +186,207 @@
         <p>STREETWEAR & MODERN MINIMALISM</p>
     </header>
 
-    <div class="container" id="shop">
-        
+    <div class="container">
         <h2 class="category-header">T-Shirts</h2>
+        
         <div class="grid">
-            <div class="product-card">
-                <div class="image-container">
-                    <img src="t1.png" alt="Ledium Tee">
+            
+            <div class="product-card" data-id="1">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="classikasi_front.png" alt="Front">
+                        <img src="classikasi_back.png" alt="Back">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
                 </div>
                 <div class="product-info">
-                    <h3>Classic Heavyweight Tee</h3>
-                    <span class="price">R 450.00</span>
-                    <a href="https://wa.me/27824598656?text=Hi%20Ledium!%20I%20want%20to%20order%20the%20Classic%20Heavyweight%20Tee." class="order-btn">PLACE ORDER</a>
+                    <h3>Ledium Classikasi Tee</h3>
+                    <span class="price">R 260.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    <select class="size-select" id="size-1">
+                        <option value="">Select Size</option>
+                        <option value="S">S</option><option value="M">M</option>
+                        <option value="L">L</option><option value="XL">XL</option>
+                    </select>
+                    <button class="add-btn" onclick="prepareAddToCart('Ledium Classikasi Tee', 260, 'size-1')">ADD TO CART</button>
                 </div>
             </div>
-            <div class="product-card">
-                <div class="image-container">
-                    <img src="t2.png" alt="Ledium Tee">
-                </div>
-                <div class="product-info">
-                    <h3>Boxy Signature Tee</h3>
-                    <span class="price">R 499.00</span>
-                    <a href="https://wa.me/27824598656?text=Hi%20Ledium!%20I%20want%20to%20order%20the%20Boxy%20Signature%20Tee." class="order-btn">PLACE ORDER</a>
-                </div>
-            </div>
-        </div>
 
-        <h2 class="category-header">Caps</h2>
-        <div class="grid">
-            <div class="product-card">
-                <div class="image-container">
-                    <img src="t3.png" alt="Ledium Cap">
+            <div class="product-card" data-id="2">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="cube_front.png" alt="Front">
+                        <img src="cube_detail.png" alt="Detail">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
                 </div>
                 <div class="product-info">
-                    <h3>LEDIUM Dad Hat</h3>
-                    <span class="price">R 299.00</span>
-                    <a href="https://wa.me/27824598656?text=Hi%20Ledium!%20I%20want%20to%20order%20the%20LEDIUM%20Dad%20Hat." class="order-btn">PLACE ORDER</a>
+                    <h3>Cube Design Tee</h3>
+                    <span class="price">R 300.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    <select class="size-select" id="size-2">
+                        <option value="">Select Size</option>
+                        <option value="S">S</option><option value="M">M</option>
+                        <option value="L">L</option><option value="XL">XL</option>
+                    </select>
+                    <button class="add-btn" onclick="prepareAddToCart('Cube Design Tee', 300, 'size-2')">ADD TO CART</button>
                 </div>
             </div>
-        </div>
 
-        <h2 class="category-header">Jeans</h2>
-        <div class="grid">
-            <div class="product-card">
-                <div class="image-container">
-                    <img src="t4.png" alt="Ledium Jeans">
+            <div class="product-card" data-id="3">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="donkey_front.png" alt="Front">
+                        <img src="donkey_alt.png" alt="Alt">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
                 </div>
                 <div class="product-info">
-                    <h3>Straight Leg Denim</h3>
-                    <span class="price">R 950.00</span>
-                    <a href="https://wa.me/27824598656?text=Hi%20Ledium!%20I%20want%20to%20order%20the%20Straight%20Leg%20Denim." class="order-btn">PLACE ORDER</a>
+                    <h3>V12 Donkey Tee</h3>
+                    <span class="price">R 330.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    <select class="size-select" id="size-3">
+                        <option value="">Select Size</option>
+                        <option value="S">S</option><option value="M">M</option>
+                        <option value="L">L</option><option value="XL">XL</option>
+                    </select>
+                    <button class="add-btn" onclick="prepareAddToCart('V12 Donkey Tee', 330, 'size-3')">ADD TO CART</button>
                 </div>
             </div>
-        </div>
 
+             <div class="product-card" data-id="4">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="kos_front.png" alt="Front">
+                        <img src="kos_lifestyle.png" alt="Lifestyle">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>Quarter/Spatlho/Kota/Kasi 'Kos</h3>
+                    <span class="price">R 360.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    <select class="size-select" id="size-4">
+                        <option value="">Select Size</option>
+                        <option value="S">S</option><option value="M">M</option>
+                        <option value="L">L</option><option value="XL">XL</option>
+                    </select>
+                    <button class="add-btn" onclick="prepareAddToCart('Kasi Kos Tee', 360, 'size-4')">ADD TO CART</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="5">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="regular_front.png" alt="Front">
+                        <img src="regular_quote.png" alt="Quote">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>Regular Show Tee (Quote)</h3>
+                    <span class="price">R 300.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    <select class="size-select" id="size-5">
+                        <option value="">Select Size</option>
+                        <option value="S">S</option><option value="M">M</option>
+                        <option value="L">L</option><option value="XL">XL</option>
+                    </select>
+                    <button class="add-btn" onclick="prepareAddToCart('Regular Show Tee', 300, 'size-5')">ADD TO CART</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="cart-sidebar">
+        <div style="display:flex; justify-content: space-between; margin-bottom: 30px;">
+            <strong>YOUR BAG</strong>
+            <span onclick="toggleCart()" style="cursor:pointer">CLOSE</span>
+        </div>
+        <div id="cart-items-list" style="flex-grow:1; overflow-y:auto;"></div>
+        <div style="border-top: 2px solid black; padding-top: 20px;">
+            <div style="display:flex; justify-content: space-between; font-weight:900;">
+                <span>TOTAL (DELIVERY INCL.)</span>
+                <span id="cart-total">R 0.00</span>
+            </div>
+            <a href="#" class="whatsapp-checkout" onclick="checkoutWhatsApp()">CHECKOUT ON WHATSAPP</a>
+        </div>
     </div>
 
     <footer>
-        <div class="footer-grid">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
             <div>
-                <div class="footer-logo">LEDIUM</div>
-                <p style="font-size: 0.8rem; opacity: 0.7;">High-quality garments designed for the modern individual.</p>
+                <strong>LEDIUM</strong>
+                <p style="font-size: 0.7rem; margin-top:10px;">Dipompong, ZA. +27 66 451 9840</p>
             </div>
-            <div class="footer-links">
-                <h4>QUICK LINKS</h4><br>
-                <p>Track Order</p>
-                <p>Size Guide</p>
-                <p>Privacy Policy</p>
+            <div>
+                <strong>PRIVACY</strong>
+                <div class="policy-box">POPIA compliant. We only use your data for order delivery via WhatsApp.</div>
             </div>
-            <div class="footer-links">
-                <h4>CONTACT</h4><br>
-                <p>WhatsApp: 082 459 8656</p>
-                <p>Email: orders@ledium.co.za</p>
-                <p>Dipompong, ZA</p>
+            <div>
+                <strong>TERMS</strong>
+                <div class="policy-box">Delivery included in all prices. Returns within 7 days for defects only.</div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2026 LEDIUM CLOTHING BRAND. DESIGNED FOR EXCELLENCE.
         </div>
     </footer>
 
+    <script>
+        let cart = [];
+        const whatsappNumber = "27664519840";
+
+        // Slider Function
+        function moveSlide(btn, direction) {
+            const wrapper = btn.parentElement.querySelector('.slider-wrapper');
+            const slides = wrapper.querySelectorAll('img').length;
+            let currentTranslate = getTranslateX(wrapper);
+            let nextIndex = (Math.abs(currentTranslate / 100) + direction + slides) % slides;
+            wrapper.style.transform = `translateX(-${nextIndex * 100}%)`;
+        }
+
+        function getTranslateX(el) {
+            const style = window.getComputedStyle(el);
+            const matrix = new WebKitCSSMatrix(style.transform);
+            return (matrix.m41 / el.offsetWidth) * 100 || 0;
+        }
+
+        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('active'); }
+
+        function prepareAddToCart(name, price, selectId) {
+            const size = document.getElementById(selectId).value;
+            if (!size) return alert("Select a size!");
+            cart.push({name, price, size});
+            updateCartUI();
+            if(!document.getElementById('cart-sidebar').classList.contains('active')) toggleCart();
+        }
+
+        function removeFromCart(index) { cart.splice(index, 1); updateCartUI(); }
+
+        function updateCartUI() {
+            const list = document.getElementById('cart-items-list');
+            const totalDisplay = document.getElementById('cart-total');
+            list.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, i) => {
+                total += item.price;
+                list.innerHTML += `<div class="cart-item"><div>${item.name} (${item.size})</div><span class="remove-link" onclick="removeFromCart(${i})">REMOVE</span></div>`;
+            });
+            document.getElementById('cart-count').innerText = cart.length;
+            totalDisplay.innerText = `R ${total.toFixed(2)}`;
+        }
+
+        function checkoutWhatsApp() {
+            if(cart.length === 0) return;
+            let msg = "*ORDER FROM LEDIUM*\n(Prices include delivery)\n\n";
+            cart.forEach((item, i) => msg += `${i+1}. ${item.name} (${item.size}) - R${item.price}\n`);
+            msg += `\n*TOTAL: R${cart.reduce((s, i) => s + i.price, 0).toFixed(2)}*`;
+            window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
+        }
+    </script>
 </body>
 </html>
