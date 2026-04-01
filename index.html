@@ -37,7 +37,8 @@
             z-index: 1000;
         }
 
-        .logo { font-size: 1.8rem; font-weight: 900; text-decoration: none; color: var(--primary); }
+        .logo-container { width: 150px; }
+        .logo-container img { width: 100%; height: auto; }
         
         .cart-icon-container { position: relative; cursor: pointer; font-size: 1.2rem; }
         #cart-count {
@@ -92,6 +93,7 @@
             min-width: 100%;
             height: 100%;
             object-fit: cover;
+            cursor: zoom-in;
         }
 
         .slider-btn {
@@ -108,6 +110,29 @@
 
         .prev { left: 0; }
         .next { right: 0; }
+
+        /* Lightbox (Image Zoom) */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        #lightbox img { max-width: 90%; max-height: 90%; object-fit: contain; }
+        #lightbox .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
 
         .product-info h3 { font-size: 0.95rem; margin-bottom: 5px; min-height: 40px; }
         .price { font-weight: 900; margin-bottom: 5px; display: block; font-size: 1.1rem; }
@@ -172,8 +197,15 @@
 </head>
 <body>
 
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <img id="lightbox-img" src="" alt="Zoomed View">
+    </div>
+
     <nav>
-      <img src="logoledium.png" width="65%" height="65%">
+        <div class="logo-container">
+            <img src="logoledium.png" alt="LEDIUM">
+        </div>
         <div class="cart-icon-container" onclick="toggleCart()">
             <i class="fas fa-shopping-cart"></i>
             <span id="cart-count">0</span>
@@ -194,8 +226,9 @@
                 <div class="product-slider">
                     <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
                     <div class="slider-wrapper">
-                        <img src="classikasi_front.png" alt="Front">
-                        <img src="classikasi_back.png" alt="Back">
+                        <img src="classikasi_front.jpg" onclick="openLightbox(this.src)">
+                        <img src="classikasi_back.jpg" onclick="openLightbox(this.src)">
+                        
                     </div>
                     <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
                 </div>
@@ -217,10 +250,10 @@
                 <div class="product-slider">
                     <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
                     <div class="slider-wrapper">
-                        <img src="cube_detail.png" alt="Detail">
-                        <img src="cube_front.png" alt="Front">
-                        <img src="cube_bblack.png" alt="Front">
-                       
+                        <img src="cube_detail.png" onclick="openLightbox(this.src)">
+                        <img src="cube_front.png" onclick="openLightbox(this.src)">
+                        <img src="cube_bblack.png" onclick="openLightbox(this.src)">
+                        <img src="cube_lifestyle.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Lifestyle'">
                     </div>
                     <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
                 </div>
@@ -242,8 +275,10 @@
                 <div class="product-slider">
                     <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
                     <div class="slider-wrapper">
-                        <img src="donkey_front.jpg" alt="Front">
-                        <img src="donkey_alt.jpg" alt="Alt">
+                        <img src="donkey_front.jpg" onclick="openLightbox(this.src)">
+                        <img src="donkey_alt.jpg" onclick="openLightbox(this.src)">
+                        <img src="donkey_detail1.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Detail+1'">
+                        <img src="donkey_detail2.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Detail+2'">
                     </div>
                     <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
                 </div>
@@ -265,8 +300,10 @@
                 <div class="product-slider">
                     <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
                     <div class="slider-wrapper">
-                        <img src="kos_front.png" alt="Front">
-                        <img src="kos_lifestyle.png" alt="Lifestyle">
+                        <img src="kos_front.png" onclick="openLightbox(this.src)">
+                        <img src="cube_front.png" onclick="openLightbox(this.src)">
+                        <img src="kos_detail1.png" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Detail+1'">
+                        <img src="cube_lifestyle.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Detail+2'">
                     </div>
                     <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
                 </div>
@@ -288,8 +325,10 @@
                 <div class="product-slider">
                     <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
                     <div class="slider-wrapper">
-                        <img src="regular_front.png" alt="Front">
-                        <img src="regular_quote.png" alt="Quote">
+                        <img src="regular_front.jpg" onclick="openLightbox(this.src)">
+                        <img src="regular_quote.jpg" onclick="openLightbox(this.src)">
+                        <img src="regular_detail1.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Detail+1'">
+                        <img src="regular_detail2.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Detail+2'">
                     </div>
                     <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
                 </div>
@@ -346,18 +385,29 @@
         let cart = [];
         const whatsappNumber = "27664519840";
 
+        // Lightbox functions
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightbox-img');
+            lbImg.src = src;
+            lb.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // Slider logic
         function moveSlide(btn, direction) {
             const wrapper = btn.parentElement.querySelector('.slider-wrapper');
             const slides = wrapper.querySelectorAll('img').length;
-            let currentTranslate = getTranslateX(wrapper);
-            let nextIndex = (Math.abs(currentTranslate / 100) + direction + slides) % slides;
-            wrapper.style.transform = `translateX(-${nextIndex * 100}%)`;
-        }
-
-        function getTranslateX(el) {
-            const style = window.getComputedStyle(el);
-            const matrix = new WebKitCSSMatrix(style.transform);
-            return (matrix.m41 / el.offsetWidth) * 100 || 0;
+            
+            // Get current index from data attribute or calculate
+            let currentIndex = parseInt(wrapper.dataset.index || 0);
+            currentIndex = (currentIndex + direction + slides) % slides;
+            
+            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            wrapper.dataset.index = currentIndex;
         }
 
         function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('active'); }
