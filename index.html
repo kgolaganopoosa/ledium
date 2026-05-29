@@ -255,6 +255,7 @@
                     
                     <select class="size-select" id="size-6">
                         <option value="">Select Size</option>
+                        <option value="Infant">Infant</option>
                         <option value="S">S</option>
                         <option value="M">M</option>
                         <option value="L">L</option>
@@ -288,6 +289,7 @@
                     
                     <select class="size-select" id="size-7">
                         <option value="">Select Size</option>
+                        <option value="Infant">Infant</option>
                         <option value="S">S</option>
                         <option value="M">M</option>
                         <option value="L">L</option>
@@ -321,6 +323,7 @@
                     
                     <select class="size-select" id="size-8">
                         <option value="">Select Size</option>
+                        <option value="Infant">Infant</option>
                         <option value="One Size">One Size</option>
                     </select>
                     
@@ -354,7 +357,12 @@
                         <option value="S">S</option><option value="M">M</option>
                         <option value="L">L</option><option value="XL">XL</option>
                     </select>
-                    <button class="add-btn" onclick="prepareAddToCart('Ledium Classikasi Tee', 260, 'size-1')">ADD TO CART</button>
+                    <select class="color-select" id="color-1">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    <button class="add-btn" onclick="addToCartWithVariant('Ledium Classikasi Tee', 260, 'size-1', 'color-1')">ADD TO CART</button>
                 </div>
             </div>
 
@@ -379,7 +387,12 @@
                         <option value="S">S</option><option value="M">M</option>
                         <option value="L">L</option><option value="XL">XL</option>
                     </select>
-                    <button class="add-btn" onclick="prepareAddToCart('Cube Design Tee', 300, 'size-2')">ADD TO CART</button>
+                    <select class="color-select" id="color-2">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    <button class="add-btn" onclick="addToCartWithVariant('Cube Design Tee', 300, 'size-2', 'color-2')">ADD TO CART</button>
                 </div>
             </div>
 
@@ -404,7 +417,12 @@
                         <option value="S">S</option><option value="M">M</option>
                         <option value="L">L</option><option value="XL">XL</option>
                     </select>
-                    <button class="add-btn" onclick="prepareAddToCart('V12 Donkey Tee', 330, 'size-3')">ADD TO CART</button>
+                    <select class="color-select" id="color-3">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    <button class="add-btn" onclick="addToCartWithVariant('V12 Donkey Tee', 330, 'size-3', 'color-3')">ADD TO CART</button>
                 </div>
             </div>
 
@@ -429,7 +447,12 @@
                         <option value="S">S</option><option value="M">M</option>
                         <option value="L">L</option><option value="XL">XL</option>
                     </select>
-                    <button class="add-btn" onclick="prepareAddToCart('Kasi Kos Tee', 360, 'size-4')">ADD TO CART</button>
+                    <select class="color-select" id="color-4">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    <button class="add-btn" onclick="addToCartWithVariant('Kasi Kos Tee', 360, 'size-4', 'color-4')">ADD TO CART</button>
                 </div>
             </div>
 
@@ -454,7 +477,12 @@
                         <option value="S">S</option><option value="M">M</option>
                         <option value="L">L</option><option value="XL">XL</option>
                     </select>
-                    <button class="add-btn" onclick="prepareAddToCart('Regular Show Tee', 300, 'size-5')">ADD TO CART</button>
+                    <select class="color-select" id="color-5">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    <button class="add-btn" onclick="addToCartWithVariant('Regular Show Tee', 300, 'size-5', 'color-5')">ADD TO CART</button>
                 </div>
             </div>
 
@@ -521,16 +549,6 @@
             document.getElementById('cart-sidebar').classList.toggle('active');
         }
 
-        // Original T-shirts (size only)
-        function prepareAddToCart(name, price, selectId) {
-            const selection = document.getElementById(selectId).value;
-            if (!selection) return alert("Please select a size!");
-            cart.push({name, price, variant: selection});
-            updateCartUI();
-            if(!document.getElementById('cart-sidebar').classList.contains('active')) toggleCart();
-        }
-
-        // New products (size + colour)
         function addToCartWithVariant(name, price, sizeId, colorId) {
             const size = document.getElementById(sizeId).value;
             const color = document.getElementById(colorId).value;
