@@ -111,15 +111,13 @@
         .prev { left: 0; }
         .next { right: 0; }
 
-        /* Lightbox (Image Zoom) */
+        /* Lightbox */
         #lightbox {
             display: none;
             position: fixed;
             z-index: 3000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0,0,0,0.9);
             justify-content: center;
             align-items: center;
@@ -127,10 +125,8 @@
         #lightbox img { max-width: 90%; max-height: 90%; object-fit: contain; }
         #lightbox .close-lightbox {
             position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 2rem;
+            top: 20px; right: 30px;
+            color: white; font-size: 2rem;
             cursor: pointer;
         }
 
@@ -138,7 +134,7 @@
         .price { font-weight: 900; margin-bottom: 5px; display: block; font-size: 1.1rem; }
         .delivery-tag { font-size: 0.65rem; color: #666; margin-bottom: 15px; display: block; font-weight: bold; }
 
-        .size-select {
+        .size-select, .color-select {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
@@ -177,7 +173,14 @@
         }
 
         #cart-sidebar.active { right: 0; }
-        .cart-item { padding: 15px 0; border-bottom: 1px solid #f9f9f9; display: flex; justify-content: space-between; align-items: center; }
+
+        .cart-item { 
+            padding: 15px 0; 
+            border-bottom: 1px solid #f9f9f9; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
         .remove-link { color: #ff4444; font-size: 0.65rem; cursor: pointer; }
 
         .whatsapp-checkout {
@@ -191,8 +194,21 @@
             margin-top: 20px;
         }
 
-        footer { background: var(--primary); color: var(--secondary); padding: 60px 5%; margin-top: 80px; }
-        .policy-box { font-size: 0.7rem; opacity: 0.6; height: 100px; overflow-y: auto; border: 1px solid #333; padding: 10px; margin-top: 10px; }
+        footer { 
+            background: var(--primary); 
+            color: var(--secondary); 
+            padding: 60px 5%; 
+            margin-top: 80px; 
+        }
+        .policy-box { 
+            font-size: 0.7rem; 
+            opacity: 0.6; 
+            height: 100px; 
+            overflow-y: auto; 
+            border: 1px solid #333; 
+            padding: 10px; 
+            margin-top: 10px; 
+        }
     </style>
 </head>
 <body>
@@ -214,7 +230,7 @@
 
     <header>
         <h1>LEDIUM</h1>
-        <p>STREETWEAR & MODERN MINIMALISM</p>
+        <p>STREETWEAR</p>
     </header>
 
     <div class="container">
@@ -222,13 +238,109 @@
         
         <div class="grid">
             
+            <!-- New Product 1 -->
+            <div class="product-card" data-id="6">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="classikasi-sweater-chest-black.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Chest+Print+Black'">
+                        <img src="classikasi-sweater-chest-white.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Chest+Print+White'">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>Classikasi Logo Sweater - Chest print</h3>
+                    <span class="price">R 330.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    
+                    <select class="size-select" id="size-6">
+                        <option value="">Select Size</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    
+                    <select class="color-select" id="color-6">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    
+                    <button class="add-btn" onclick="addToCartWithVariant('Classikasi Logo Sweater - Chest print', 330, 'size-6', 'color-6')">ADD TO CART</button>
+                </div>
+            </div>
+
+            <!-- New Product 2 -->
+            <div class="product-card" data-id="7">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="classikasi-sweater-pocket-black.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Pocket+Print+Black'">
+                        <img src="classikasi-sweater-pocket-white.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Pocket+Print+White'">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>Classikasi Logo Sweater - Pocket-sized print</h3>
+                    <span class="price">R 290.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    
+                    <select class="size-select" id="size-7">
+                        <option value="">Select Size</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    
+                    <select class="color-select" id="color-7">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    
+                    <button class="add-btn" onclick="addToCartWithVariant('Classikasi Logo Sweater - Pocket-sized print', 290, 'size-7', 'color-7')">ADD TO CART</button>
+                </div>
+            </div>
+
+            <!-- New Product 3 -->
+            <div class="product-card" data-id="8">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="classikasi-beanie-black.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Beanie+Black'">
+                        <img src="classikasi-beanie-white.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Beanie+White'">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>Classikasi Logo Beanie</h3>
+                    <span class="price">R 200.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    
+                    <select class="size-select" id="size-8">
+                        <option value="">Select Size</option>
+                        <option value="One Size">One Size</option>
+                    </select>
+                    
+                    <select class="color-select" id="color-8">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    
+                    <button class="add-btn" onclick="addToCartWithVariant('Classikasi Logo Beanie', 200, 'size-8', 'color-8')">ADD TO CART</button>
+                </div>
+            </div>
+
+            <!-- Original T-Shirts -->
             <div class="product-card" data-id="1">
                 <div class="product-slider">
                     <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
                     <div class="slider-wrapper">
                         <img src="classikasi_front.jpg" onclick="openLightbox(this.src)">
                         <img src="classikasi_back.jpg" onclick="openLightbox(this.src)">
-                        
                     </div>
                     <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
                 </div>
@@ -385,7 +497,6 @@
         let cart = [];
         const whatsappNumber = "27664519840";
 
-        // Lightbox functions
         function openLightbox(src) {
             const lb = document.getElementById('lightbox');
             const lbImg = document.getElementById('lightbox-img');
@@ -397,40 +508,65 @@
             document.getElementById('lightbox').style.display = 'none';
         }
 
-        // Slider logic
         function moveSlide(btn, direction) {
             const wrapper = btn.parentElement.querySelector('.slider-wrapper');
             const slides = wrapper.querySelectorAll('img').length;
-            
-            // Get current index from data attribute or calculate
             let currentIndex = parseInt(wrapper.dataset.index || 0);
             currentIndex = (currentIndex + direction + slides) % slides;
-            
             wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
             wrapper.dataset.index = currentIndex;
         }
 
-        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('active'); }
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('active');
+        }
 
+        // Original T-shirts (size only)
         function prepareAddToCart(name, price, selectId) {
-            const size = document.getElementById(selectId).value;
-            if (!size) return alert("Select a size!");
-            cart.push({name, price, size});
+            const selection = document.getElementById(selectId).value;
+            if (!selection) return alert("Please select a size!");
+            cart.push({name, price, variant: selection});
             updateCartUI();
             if(!document.getElementById('cart-sidebar').classList.contains('active')) toggleCart();
         }
 
-        function removeFromCart(index) { cart.splice(index, 1); updateCartUI(); }
+        // New products (size + colour)
+        function addToCartWithVariant(name, price, sizeId, colorId) {
+            const size = document.getElementById(sizeId).value;
+            const color = document.getElementById(colorId).value;
+            
+            if (!size) return alert("Please select a size!");
+            if (!color) return alert("Please select a colour!");
+            
+            const variant = `${color} / ${size}`;
+            cart.push({name, price, variant});
+            updateCartUI();
+            if(!document.getElementById('cart-sidebar').classList.contains('active')) toggleCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
 
         function updateCartUI() {
             const list = document.getElementById('cart-items-list');
             const totalDisplay = document.getElementById('cart-total');
             list.innerHTML = '';
             let total = 0;
+
             cart.forEach((item, i) => {
                 total += item.price;
-                list.innerHTML += `<div class="cart-item"><div>${item.name} (${item.size})</div><span class="remove-link" onclick="removeFromCart(${i})">REMOVE</span></div>`;
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong><br>
+                            <small>(${item.variant})</small>
+                        </div>
+                        <span class="remove-link" onclick="removeFromCart(${i})">REMOVE</span>
+                    </div>`;
             });
+
             document.getElementById('cart-count').innerText = cart.length;
             totalDisplay.innerText = `R ${total.toFixed(2)}`;
         }
@@ -438,9 +574,11 @@
         function checkoutWhatsApp() {
             if(cart.length === 0) return;
             let msg = "*ORDER FROM LEDIUM*\n(Prices include delivery)\n\n";
-            cart.forEach((item, i) => msg += `${i+1}. ${item.name} (${item.size}) - R${item.price}\n`);
+            cart.forEach((item, i) => {
+                msg += `${i+1}. \( {item.name} ( \){item.variant}) - R${item.price}\n`;
+            });
             msg += `\n*TOTAL: R${cart.reduce((s, i) => s + i.price, 0).toFixed(2)}*`;
-            window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
+            window.location.href = `https://wa.me/\( {whatsappNumber}?text= \){encodeURIComponent(msg)}`;
         }
     </script>
 </body>
