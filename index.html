@@ -65,7 +65,6 @@
 
         /* Shop Grid */
         .container { padding: 60px 5%; }
-        .category-header { margin-bottom: 40px; font-size: 1.8rem; border-bottom: 3px solid var(--primary); display: inline-block; }
 
         .grid {
             display: grid;
@@ -235,8 +234,7 @@
 
     <div class="container">
         <div class="grid">
-            <!-- Product 1 -->
-            <div class="product-card" data-id="101">
+            <div class="product-card" data-id="1">
                 <div class="product-slider">
                     <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
                     <div class="slider-wrapper">
@@ -246,164 +244,19 @@
                     <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
                 </div>
                 <div class="product-info">
-                    <h3>CUBE Sweater - Front Print B&W</h3>
+                    <h3>CUBE Sweater</h3>
                     <span class="price">R 300.00</span>
-                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
-                    <select class="size-select" id="size-101">
+                    <select class="size-select" id="size-1">
                         <option value="">Select Size</option>
                         <option value="S">S</option><option value="M">M</option>
                         <option value="L">L</option><option value="XL">XL</option>
                     </select>
-                    <select class="color-select" id="color-101">
+                    <select class="color-select" id="color-1">
                         <option value="">Select Colour</option>
                         <option value="Black">Black</option>
                         <option value="White">White</option>
                     </select>
-                    <button class="add-btn" onclick="addToCartWithVariant('CUBE Sweater - Front Print', 300, 'size-101', 'color-101')">ADD TO CART</button>
-                </div>
-            </div> 
-
-            <!-- Product 2 -->
-            <div class="product-card" data-id="102">
-                <div class="product-slider">
-                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
-                    <div class="slider-wrapper">
-                        <img src="cpb.png" onclick="openLightbox(this.src)">
-                        <img src="cpw.png" onclick="openLightbox(this.src)">
-                    </div>
-                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
-                </div>
-                <div class="product-info">
-                    <h3>CUBE Pants - Front print</h3>
-                    <span class="price">R 300.00</span>
-                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
-                    <select class="size-select" id="size-102">
-                        <option value="">Select Size</option>
-                        <option value="S">S</option><option value="M">M</option>
-                        <option value="L">L</option><option value="XL">XL</option>
-                    </select>
-                    <select class="color-select" id="color-102">
-                        <option value="">Select Colour</option>
-                        <option value="Black">Black</option>
-                        <option value="White">White</option>
-                    </select>
-                    <button class="add-btn" onclick="addToCartWithVariant('CUBE Pants', 300, 'size-102', 'color-102')">ADD TO CART</button>
-                </div>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="product-card" data-id="103">
-                <div class="product-slider">
-                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
-                    <div class="slider-wrapper">
-                        <img src="qbb.png" onclick="openLightbox(this.src)">
-                        <img src="qfb.png" onclick="openLightbox(this.src)">
-                        <img src="qbw.png" onclick="openLightbox(this.src)">
-                        <img src="qfw.png" onclick="openLightbox(this.src)">
-                    </div>
-                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
-                </div>
-                <div class="product-info">
-                    <h3>Quarter Joint Sweater - Back Print</h3>
-                    <span class="price">R 300.00</span>
-                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
-                    <select class="size-select" id="size-103">
-                        <option value="">Select Size</option>
-                        <option value="S">S</option><option value="M">M</option>
-                        <option value="L">L</option><option value="XL">XL</option>
-                    </select>
-                    <select class="color-select" id="color-103">
-                        <option value="">Select Colour</option>
-                        <option value="Black">Black</option>
-                        <option value="White">White</option>
-                    </select>
-                    <button class="add-btn" onclick="addToCartWithVariant('Quarter Joint Sweater', 300, 'size-103', 'color-103')">ADD TO CART</button>
-                </div>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="product-card" data-id="104">
-                <div class="product-slider">
-                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
-                    <div class="slider-wrapper">
-                        <img src="v122fw.png" onclick="openLightbox(this.src)">
-                        <img src="v122bw.png" onclick="openLightbox(this.src)">
-                        <img src="v122f.png" onclick="openLightbox(this.src)">
-                        <img src="v122b.png" onclick="openLightbox(this.src)">
-                    </div>
-                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
-                </div>
-                <div class="product-info">
-                    <h3>V12 Sweater - Front & Back Print</h3>
-                    <span class="price">R 300.00</span>
-                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
-                    <select class="size-select" id="size-104">
-                        <option value="">Select Size</option>
-                        <option value="S">S</option><option value="M">M</option>
-                        <option value="L">L</option><option value="XL">XL</option>
-                    </select>
-                    <select class="color-select" id="color-104">
-                        <option value="">Select Colour</option>
-                        <option value="Black">Black</option>
-                        <option value="White">White</option>
-                    </select>
-                    <button class="add-btn" onclick="addToCartWithVariant('V12 Sweater', 300, 'size-104', 'color-104')">ADD TO CART</button>
-                </div>
-            </div>
-
-            <!-- Product 5 -->
-            <div class="product-card" data-id="105">
-                <div class="product-slider">
-                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
-                    <div class="slider-wrapper">
-                        <img src="classikasi-sweater-chest-black.png" onclick="openLightbox(this.src)">
-                        <img src="classikasi-sweater-chest-white.png" onclick="openLightbox(this.src)">
-                    </div>
-                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
-                </div>
-                <div class="product-info">
-                    <h3>Classikasi Logo Sweater - Chest print</h3>
-                    <span class="price">R 330.00</span>
-                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
-                    <select class="size-select" id="size-105">
-                        <option value="">Select Size</option>
-                        <option value="S">S</option><option value="M">M</option>
-                        <option value="L">L</option><option value="XL">XL</option>
-                    </select>
-                    <select class="color-select" id="color-105">
-                        <option value="">Select Colour</option>
-                        <option value="Black">Black</option>
-                        <option value="White">White</option>
-                    </select>
-                    <button class="add-btn" onclick="addToCartWithVariant('Classikasi Logo Sweater Chest', 330, 'size-105', 'color-105')">ADD TO CART</button>
-                </div>
-            </div>
-
-            <!-- Product 6 -->
-            <div class="product-card" data-id="106">
-                <div class="product-slider">
-                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
-                    <div class="slider-wrapper">
-                        <img src="classikasi-sweater-pocket-black.png" onclick="openLightbox(this.src)">
-                        <img src="classikasi-sweater-pocket-white.png" onclick="openLightbox(this.src)">
-                    </div>
-                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
-                </div>
-                <div class="product-info">
-                    <h3>Classikasi Logo Sweater - Pocket-sized print</h3>
-                    <span class="price">R 290.00</span>
-                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
-                    <select class="size-select" id="size-106">
-                        <option value="">Select Size</option>
-                        <option value="S">S</option><option value="M">M</option>
-                        <option value="L">L</option><option value="XL">XL</option>
-                    </select>
-                    <select class="color-select" id="color-106">
-                        <option value="">Select Colour</option>
-                        <option value="Black">Black</option>
-                        <option value="White">White</option>
-                    </select>
-                    <button class="add-btn" onclick="addToCartWithVariant('Classikasi Logo Sweater Pocket', 290, 'size-106', 'color-106')">ADD TO CART</button>
+                    <button class="add-btn" onclick="addToCartWithVariant('CUBE Sweater', 300, 'size-1', 'color-1')">ADD TO CART</button>
                 </div>
             </div>
         </div>
@@ -423,23 +276,6 @@
             <a href="#" class="whatsapp-checkout" onclick="checkoutWhatsApp()">CHECKOUT ON WHATSAPP</a>
         </div>
     </div>
-
-    <footer>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
-            <div>
-                <strong>LEDIUM</strong>
-                <p style="font-size: 0.7rem; margin-top:10px;">Dipompong, ZA. +27 66 451 9840</p>
-            </div>
-            <div>
-                <strong>PRIVACY</strong>
-                <div class="policy-box">POPIA compliant. We only use your data for order delivery via WhatsApp.</div>
-            </div>
-            <div>
-                <strong>TERMS</strong>
-                <div class="policy-box">Delivery included in all prices. Returns within 7 days for defects only.</div>
-            </div>
-        </div>
-    </footer>
 
     <script>
         let cart = [];
@@ -511,12 +347,15 @@
 
         function checkoutWhatsApp() {
             if(cart.length === 0) return;
+            
             let msg = "*ORDER FROM LEDIUM*\n(Prices include delivery)\n\n";
             cart.forEach((item, i) => {
                 msg += `${i+1}. ${item.name} (${item.variant}) - R${item.price}\n`;
             });
             msg += `\n*TOTAL: R${cart.reduce((s, i) => s + i.price, 0).toFixed(2)}*`;
-            window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
+            
+            const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
         }
     </script>
 </body>
