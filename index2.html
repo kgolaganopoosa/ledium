@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEDIUM CLOTHING | Official Store</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #ffffff;
+            --gray: #f4f4f4;
+            --whatsapp: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        body { background-color: var(--secondary); color: var(--primary); overflow-x: hidden; }
+
+        /* Navigation */
+        nav {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--primary);
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1000;
+        }
+
+        .logo-container { width: 150px; }
+        .logo-container img { width: 100%; height: auto; }
+        
+        .cart-icon-container { position: relative; cursor: pointer; font-size: 1.2rem; }
+        #cart-count {
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            background: var(--whatsapp);
+            color: white;
+            font-size: 0.65rem;
+            padding: 3px 7px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        header {
+            padding: 80px 5%;
+            background: var(--primary);
+            color: var(--secondary);
+            text-align: center;
+        }
+
+        header h1 { font-size: 3.5rem; margin-bottom: 10px; font-weight: 900; }
+        header p { font-size: 0.9rem; letter-spacing: 4px; opacity: 0.8; }
+
+        /* Shop Grid */
+        .container { padding: 60px 5%; }
+        .category-header { margin-bottom: 40px; font-size: 1.8rem; border-bottom: 3px solid var(--primary); display: inline-block; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+        }
+
+        /* Image Slider Styles */
+        .product-slider {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .slider-wrapper img {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: zoom-in;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.7);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 0.8rem;
+        }
+
+        .prev { left: 0; }
+        .next { right: 0; }
+
+        /* Lightbox */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        #lightbox img { max-width: 90%; max-height: 90%; object-fit: contain; }
+        #lightbox .close-lightbox {
+            position: absolute;
+            top: 20px; right: 30px;
+            color: white; font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .product-info h3 { font-size: 0.95rem; margin-bottom: 5px; min-height: 40px; }
+        .price { font-weight: 900; margin-bottom: 5px; display: block; font-size: 1.1rem; }
+        .delivery-tag { font-size: 0.65rem; color: #666; margin-bottom: 15px; display: block; font-weight: bold; }
+
+        .size-select, .color-select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .add-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: var(--secondary);
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        /* Cart Sidebar */
+        #cart-sidebar {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background: white;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            transition: 0.5s;
+            z-index: 2000;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #cart-sidebar.active { right: 0; }
+
+        .cart-item { 
+            padding: 15px 0; 
+            border-bottom: 1px solid #f9f9f9; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .remove-link { color: #ff4444; font-size: 0.65rem; cursor: pointer; }
+
+        .whatsapp-checkout {
+            background: var(--whatsapp);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            text-decoration: none;
+            display: block;
+            font-weight: 900;
+            margin-top: 20px;
+        }
+
+        footer { 
+            background: var(--primary); 
+            color: var(--secondary); 
+            padding: 60px 5%; 
+            margin-top: 80px; 
+        }
+        .policy-box { 
+            font-size: 0.7rem; 
+            opacity: 0.6; 
+            height: 100px; 
+            overflow-y: auto; 
+            border: 1px solid #333; 
+            padding: 10px; 
+            margin-top: 10px; 
+        }
+    </style>
+</head>
+<body>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <img id="lightbox-img" src="" alt="Zoomed View">
+    </div>
+
+    <nav>
+        <div class="logo-container">
+            <img src="logoledium.png" alt="LEDIUM">
+        </div>
+        <div class="cart-icon-container" onclick="toggleCart()">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count">0</span>
+        </div>
+    </nav>
+
+    <header>
+        <h1>LEDIUM</h1>
+        <p>STREETWEAR</p>
+    </header>
+
+    <div class="container">
+        <!--<h2 class="category-header">T-Shirts</h2>-->
+        
+        <div class="grid">
+            
+            <!-- New Product 1 -->
+            <div class="product-card" data-id="6">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="classikasi-sweater-chest-black.png" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Chest+Print+Black'">
+                        <img src="classikasi-sweater-chest-white.png" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Chest+Print+White'">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>Kota Joint Sweater - Back Print</h3>
+                    <span class="price">R 330.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    
+                    <select class="size-select" id="size-6">
+                        <option value="">Select Size</option>
+                        <option value="Infant">Infant</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    
+                    <select class="color-select" id="color-6">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    
+                    <button class="add-btn" onclick="addToCartWithVariant('Classikasi Logo Sweater - Chest print', 330, 'size-6', 'color-6')">ADD TO CART</button>
+                </div>
+            </div>
+            
+            
+            <!-- New Product 1 -->
+            <div class="product-card" data-id="6">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="classikasi-sweater-chest-black.png" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Chest+Print+Black'">
+                        <img src="classikasi-sweater-chest-white.png" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Chest+Print+White'">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>Classikasi Logo Sweater - Chest print</h3>
+                    <span class="price">R 330.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    
+                    <select class="size-select" id="size-6">
+                        <option value="">Select Size</option>
+                        <option value="Infant">Infant</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    
+                    <select class="color-select" id="color-6">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    
+                    <button class="add-btn" onclick="addToCartWithVariant('Classikasi Logo Sweater - Chest print', 330, 'size-6', 'color-6')">ADD TO CART</button>
+                </div>
+            </div>
+
+            <!-- New Product 2 -->
+            <div class="product-card" data-id="7">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="classikasi-sweater-pocket-black.png" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Pocket+Print+Black'">
+                        <img src="classikasi-sweater-pocket-white.png" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Pocket+Print+White'">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>Classikasi Logo Sweater - Pocket-sized print</h3>
+                    <span class="price">R 290.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    
+                    <select class="size-select" id="size-7">
+                        <option value="">Select Size</option>
+                        <option value="Infant">Infant</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    
+                    <select class="color-select" id="color-7">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    
+                    <button class="add-btn" onclick="addToCartWithVariant('Classikasi Logo Sweater - Pocket-sized print', 290, 'size-7', 'color-7')">ADD TO CART</button>
+                </div>
+            </div>
+
+            <!-- New Product 3 -->
+            <div class="product-card" data-id="8">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="classikasi-beanie-black.png" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Beanie+Black'">
+                        <img src="classikasi-beanie-white.png" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Beanie+White'">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>Classikasi Logo Beanie</h3>
+                    <span class="price">R 200.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    
+                    <select class="size-select" id="size-8">
+                        <option value="">Select Size</option>
+                        <option value="Infant">Infant</option>
+                        <option value="One Size">One Size</option>
+                    </select>
+                    
+                    <select class="color-select" id="color-8">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    
+                    <button class="add-btn" onclick="addToCartWithVariant('Classikasi Logo Beanie', 200, 'size-8', 'color-8')">ADD TO CART</button>
+                </div>
+            </div>
+
+            <!-- Original T-Shirts -->
+            <div class="product-card" data-id="1">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="classikasi_front.jpg" onclick="openLightbox(this.src)">
+                        <img src="classikasi_back.jpg" onclick="openLightbox(this.src)">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>Ledium Classikasi Tee</h3>
+                    <span class="price">R 260.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    <select class="size-select" id="size-1">
+                        <option value="">Select Size</option>
+                        <option value="Infant">Infant</option>
+                        <option value="S">S</option><option value="M">M</option>
+                        <option value="L">L</option><option value="XL">XL</option>
+                    </select>
+                    <select class="color-select" id="color-1">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    <button class="add-btn" onclick="addToCartWithVariant('Ledium Classikasi Tee', 260, 'size-1', 'color-1')">ADD TO CART</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="2">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="cube_detail.png" onclick="openLightbox(this.src)">
+                        <img src="cube_front.png" onclick="openLightbox(this.src)">
+                        <img src="cube_bblack.png" onclick="openLightbox(this.src)">
+                        <img src="cube_lifestyle.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Lifestyle'">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>Cube Design Tee</h3>
+                    <span class="price">R 300.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    <select class="size-select" id="size-2">
+                        <option value="">Select Size</option>
+                        <option value="Infant">Infant</option>
+                        <option value="S">S</option><option value="M">M</option>
+                        <option value="L">L</option><option value="XL">XL</option>
+                    </select>
+                    <select class="color-select" id="color-2">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    <select>
+                    <button class="add-btn" onclick="addToCartWithVariant('Cube Design Tee', 300, 'size-2', 'color-2')">ADD TO CART</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="3">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="donkey_front.jpg" onclick="openLightbox(this.src)">
+                        <img src="donkey_alt2.jpg" onclick="openLightbox(this.src)">
+                        <img src="donkey_detail1.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Detail+1'">
+                        <img src="donkey_detail2.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Detail+2'">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>V12 Donkey Tee</h3>
+                    <span class="price">R 330.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    <select class="size-select" id="size-3">
+                        <option value="">Select Size</option>
+                        <option value="Infant">Infant</option>
+                        <option value="S">S</option><option value="M">M</option>
+                        <option value="L">L</option><option value="XL">XL</option>
+                    </select>
+                    <select class="color-select" id="color-3">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    <button class="add-btn" onclick="addToCartWithVariant('V12 Donkey Tee', 330, 'size-3', 'color-3')">ADD TO CART</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="4">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="kos_front.png" onclick="openLightbox(this.src)">
+                        <img src="cube_front.png" onclick="openLightbox(this.src)">
+                        <img src="kos_detail1.png" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Detail+1'">
+                        <img src="cube_lifestyle.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Detail+2'">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>Quarter/Spatlho/Kota/Kasi 'Kos</h3>
+                    <span class="price">R 360.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    <select class="size-select" id="size-4">
+                        <option value="">Select Size</option>
+                        <option value="Infant">Infant</option>
+                        <option value="S">S</option><option value="M">M</option>
+                        <option value="L">L</option><option value="XL">XL</option>
+                    </select>
+                    <select class="color-select" id="color-4">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    <button class="add-btn" onclick="addToCartWithVariant('Kasi Kos Tee', 360, 'size-4', 'color-4')">ADD TO CART</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="5">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="regular_front.jpg" onclick="openLightbox(this.src)">
+                        <img src="regular_quote.jpg" onclick="openLightbox(this.src)">
+                        <img src="regular_detail1.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Detail+1'">
+                        <img src="regular_detail2.jpg" onclick="openLightbox(this.src)" onerror="this.src='https://via.placeholder.com/500?text=Detail+2'">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>Regular Show Tee (Quote)</h3>
+                    <span class="price">R 300.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    <select class="size-select" id="size-5">
+                        <option value="">Select Size</option>
+                        <option value="Infant">Infant</option>
+                        <option value="S">S</option><option value="M">M</option>
+                        <option value="L">L</option><option value="XL">XL</option>
+                    </select>
+                    <select class="color-select" id="color-5">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                    </select>
+                    <button class="add-btn" onclick="addToCartWithVariant('Regular Show Tee', 300, 'size-5', 'color-5')">ADD TO CART</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="cart-sidebar">
+        <div style="display:flex; justify-content: space-between; margin-bottom: 30px;">
+            <strong>YOUR BAG</strong>
+            <span onclick="toggleCart()" style="cursor:pointer">CLOSE</span>
+        </div>
+        <div id="cart-items-list" style="flex-grow:1; overflow-y:auto;"></div>
+        <div style="border-top: 2px solid black; padding-top: 20px;">
+            <div style="display:flex; justify-content: space-between; font-weight:900;">
+                <span>TOTAL (DELIVERY INCL.)</span>
+                <span id="cart-total">R 0.00</span>
+            </div>
+            <a href="#" class="whatsapp-checkout" onclick="checkoutWhatsApp()">CHECKOUT ON WHATSAPP</a>
+        </div>
+    </div>
+
+    <footer>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+            <div>
+                <strong>LEDIUM</strong>
+                <p style="font-size: 0.7rem; margin-top:10px;">Dipompong, ZA. +27 66 451 9840</p>
+            </div>
+            <div>
+                <strong>PRIVACY</strong>
+                <div class="policy-box">POPIA compliant. We only use your data for order delivery via WhatsApp.</div>
+            </div>
+            <div>
+                <strong>TERMS</strong>
+                <div class="policy-box">Delivery included in all prices. Returns within 7 days for defects only.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+        const whatsappNumber = "27664519840";
+
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightbox-img');
+            lbImg.src = src;
+            lb.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        function moveSlide(btn, direction) {
+            const wrapper = btn.parentElement.querySelector('.slider-wrapper');
+            const slides = wrapper.querySelectorAll('img').length;
+            let currentIndex = parseInt(wrapper.dataset.index || 0);
+            currentIndex = (currentIndex + direction + slides) % slides;
+            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            wrapper.dataset.index = currentIndex;
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('active');
+        }
+
+        function addToCartWithVariant(name, price, sizeId, colorId) {
+            const size = document.getElementById(sizeId).value;
+            const color = document.getElementById(colorId).value;
+            
+            if (!size) return alert("Please select a size!");
+            if (!color) return alert("Please select a colour!");
+            
+            const variant = `${color} / ${size}`;
+            cart.push({name, price, variant});
+            updateCartUI();
+            if(!document.getElementById('cart-sidebar').classList.contains('active')) toggleCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const list = document.getElementById('cart-items-list');
+            const totalDisplay = document.getElementById('cart-total');
+            list.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, i) => {
+                total += item.price;
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong><br>
+                            <small>(${item.variant})</small>
+                        </div>
+                        <span class="remove-link" onclick="removeFromCart(${i})">REMOVE</span>
+                    </div>`;
+            });
+
+            document.getElementById('cart-count').innerText = cart.length;
+            totalDisplay.innerText = `R ${total.toFixed(2)}`;
+        }
+
+        function checkoutWhatsApp() {
+            if(cart.length === 0) return;
+            let msg = "*ORDER FROM LEDIUM*\n(Prices include delivery)\n\n";
+            cart.forEach((item, i) => {
+                msg += `${i+1}. \( {item.name} ( \){item.variant}) - R${item.price}\n`;
+            });
+            msg += `\n*TOTAL: R${cart.reduce((s, i) => s + i.price, 0).toFixed(2)}*`;
+            window.location.href = `https://wa.me/\( {whatsappNumber}?text= \){encodeURIComponent(msg)}`;
+        }
+    </script>
+</body>
+</html>
