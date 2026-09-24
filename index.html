@@ -235,6 +235,37 @@
 
     <div class="container">
         <div class="grid">
+
+            <!-- Product 1 -->
+            <div class="product-card" data-id="101">
+                <div class="product-slider">
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">❮</button>
+                    <div class="slider-wrapper">
+                        <img src="v12A.png" onclick="openLightbox(this.src)">
+                        <img src="v12B.png" onclick="openLightbox(this.src)">
+                        <img src="v12C.png" onclick="openLightbox(this.src)">
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">❯</button>
+                </div>
+                <div class="product-info">
+                    <h3>V12 ENGINE EMBROIDERED</h3>
+                    <span class="price">R 450.00</span>
+                    <span class="delivery-tag">FREE DELIVERY INCLUDED</span>
+                    <select class="size-select" id="size-101">
+                        <option value="">Select Size</option>
+                        <option value="S">S</option><option value="M">M</option>
+                        <option value="L">L</option><option value="XL">XL</option>
+                    </select>
+                    <select class="color-select" id="color-101">
+                        <option value="">Select Colour</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                        <option value="White">Olive Green</option>
+                    </select>
+                    <button class="add-btn" onclick="addToCartWithVariant('V12 ENGINE EMBROIDERED', 450, 'size-101', 'color-101')">ADD TO CART</button>
+                </div>
+            </div> 
+            
             <!-- Product 1 -->
             <div class="product-card" data-id="101">
                 <div class="product-slider">
